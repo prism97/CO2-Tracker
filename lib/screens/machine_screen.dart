@@ -1,3 +1,4 @@
+import 'package:co2_tracker/screens/daily_screen.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,16 @@ class _MachineScreenState extends State<MachineScreen> {
               ),
             ],
           ),
+          if (daily)
+            const AspectRatio(
+              aspectRatio: 2,
+              child: LineChartDaily(),
+            ),
+          if (monthly)
+            const AspectRatio(
+              aspectRatio: 2,
+              child: LineChartDaily(),
+            ),
           if (weekly)
             AspectRatio(
               aspectRatio: 2,
