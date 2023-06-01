@@ -9,9 +9,14 @@ class NavBar extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.ac_unit_outlined),
+        title: Text("CO2 Tracker"),
         actions: [],
+        backgroundColor: Theme.of(context).primaryColorLight,
       ),
-      body: body,
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: body,
+      ),
     );
   }
 }
