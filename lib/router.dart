@@ -1,4 +1,5 @@
 import 'package:co2_tracker/navbar.dart';
+import 'package:co2_tracker/screens/achievement_screen.dart';
 import 'package:co2_tracker/screens/catalogue_screen.dart';
 import 'package:co2_tracker/screens/community_screen.dart';
 import 'package:co2_tracker/screens/machine_screen.dart';
@@ -32,6 +33,10 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'community',
               builder: (context, state) => CommunityScreen(),
+            ),
+            GoRoute(
+              path: 'reward',
+              builder: (context, state) => RewardsScreen(),
             ),
           ],
         ),

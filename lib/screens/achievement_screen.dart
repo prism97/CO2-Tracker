@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class RewardsScreen extends StatelessWidget {
   final List<Reward> rewards = [
     Reward('You won the discount for Lidl', 'assets/images/Lidl.png'),
-    Reward('You won the super badge', 'assets/images/Lidl.png'),
-    Reward('You saved 30% carbon emissions', 'assets/images/Lidl.png'),
+    Reward('You won the super badge', 'assets/images/gold.png'),
+    Reward('You saved 30% carbon emissions', 'assets/images/leaf.png'),
     // Add more rewards as needed
   ];
 

@@ -20,6 +20,11 @@ class NavBar extends StatelessWidget {
             icon: const Icon(Icons.compare),
             label: const Text("Community"),
           ),
+          TextButton.icon(
+            onPressed: () => router.go("/reward"),
+            icon: const Icon(Icons.compare),
+            label: const Text("Reward"),
+          ),
         ],
       ),
       body: Padding(
