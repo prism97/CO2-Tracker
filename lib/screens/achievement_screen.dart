@@ -8,17 +8,55 @@ class RewardsScreen extends StatelessWidget {
     // Add more rewards as needed
   ];
 
+  final int streakDays = 10; // Number of days of streak
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Rewards'),
       ),
-      body: ListView.builder(
-        itemCount: rewards.length,
-        itemBuilder: (context, index) {
-          return RewardItem(reward: rewards[index]);
-        },
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Rewards',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 16),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: rewards.length,
+                    itemBuilder: (context, index) {
+                      return RewardItem(reward: rewards[index]);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Streak',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    'Current Streak: $streakDays days',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
