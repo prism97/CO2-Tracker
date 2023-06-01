@@ -2,8 +2,6 @@ import 'package:co2_tracker/router.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'colors.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -18,14 +16,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'CO2 Tracker',
       theme: ThemeData(
-        brightness: Brightness.dark,
         useMaterial3: true,
         textTheme: GoogleFonts.assistantTextTheme(
-          Theme.of(context).textTheme.apply(
-                bodyColor: AppColors.mainTextColor3,
-              ),
+          Theme.of(context).textTheme,
         ),
-        scaffoldBackgroundColor: AppColors.pageBackground,
+        colorScheme: const ColorScheme.highContrastLight(
+          primary: Colors.greenAccent,
+        ),
       ),
       routerConfig: router,
     );
