@@ -16,59 +16,66 @@ class _MachineScreenState extends State<MachineScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Text(widget.machine),
-          Wrap(
-            children: [
-              ChoiceChip(
-                label: const Text("Daily"),
-                selected: daily,
-                onSelected: (val) => setState(() {
-                  if (val) {
-                    daily = val;
-                    weekly = !val;
-                    monthly = !val;
-                  }
-                }),
-              ),
-              ChoiceChip(
-                label: const Text("Weekly"),
-                selected: weekly,
-                onSelected: (val) => setState(() {
-                  if (val) {
-                    daily = !val;
-                    weekly = val;
-                    monthly = !val;
-                  }
-                }),
-              ),
-              ChoiceChip(
-                label: const Text("Monthly"),
-                selected: monthly,
-                onSelected: (val) => setState(() {
-                  if (val) {
-                    daily = !val;
-                    weekly = !val;
-                    monthly = val;
-                  }
-                }),
-              ),
-            ],
-          ),
-          if (daily)
-            const AspectRatio(
-              aspectRatio: 2,
+    return Column(
+      children: [
+        Text(widget.machine),
+        Wrap(
+          children: [
+            ChoiceChip(
+              label: const Text("Daily"),
+              selected: daily,
+              onSelected: (val) => setState(() {
+                if (val) {
+                  daily = val;
+                  weekly = !val;
+                  monthly = !val;
+                }
+              }),
+            ),
+            ChoiceChip(
+              label: const Text("Weekly"),
+              selected: weekly,
+              onSelected: (val) => setState(() {
+                if (val) {
+                  daily = !val;
+                  weekly = val;
+                  monthly = !val;
+                }
+              }),
+            ),
+            ChoiceChip(
+              label: const Text("Monthly"),
+              selected: monthly,
+              onSelected: (val) => setState(() {
+                if (val) {
+                  daily = !val;
+                  weekly = !val;
+                  monthly = val;
+                }
+              }),
+            ),
+          ],
+        ),
+        if (daily)
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: const AspectRatio(
+              aspectRatio: 1,
               child: PieChartDaily(),
             ),
-          if (monthly)
-            const AspectRatio(
-              aspectRatio: 2,
+          ),
+        if (monthly)
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: const AspectRatio(
+              aspectRatio: 1,
               child: LineChartDaily(),
             ),
-          if (weekly)
-            AspectRatio(
+          ),
+        if (weekly)
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: AspectRatio(
               aspectRatio: 2,
               child: BarChart(
                 BarChartData(
@@ -133,8 +140,8 @@ class _MachineScreenState extends State<MachineScreen> {
                 swapAnimationCurve: Curves.bounceInOut,
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 

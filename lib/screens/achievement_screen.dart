@@ -8,55 +8,55 @@ class RewardsScreen extends StatelessWidget {
     // Add more rewards as needed
   ];
 
-  final int streakDays = 10; // Number of days of streak
+  final int streakDays = 10;
+
+  RewardsScreen({super.key}); // Number of days of streak
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Rewards'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Rewards',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 16),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: rewards.length,
-                    itemBuilder: (context, index) {
-                      return RewardItem(reward: rewards[index]);
-                    },
-                  ),
-                ],
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Rewards',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 16),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: rewards.length,
+                  itemBuilder: (context, index) {
+                    return RewardItem(reward: rewards[index]);
+                  },
+                ),
+              ],
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Streak',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Current Streak: $streakDays days',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Streak',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Current Streak: $streakDays days',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -76,9 +76,13 @@ class RewardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Image.asset(reward.imagePath),
-      title: Text(reward.text),
+    return Card(
+      child: ListTile(
+        leading: Image.asset(reward.imagePath),
+        title: Text(reward.text),
+        contentPadding: const EdgeInsets.all(16),
+        onTap: () {},
+      ),
     );
   }
 }

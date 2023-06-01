@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 import 'package:co2_tracker/colors.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -18,8 +17,10 @@ class CommunityScreen extends StatefulWidget {
 
   final Color barBackgroundColor =
       AppColors.contentColorWhite.darken().withOpacity(0.3);
-  final Color barColor = AppColors.contentColorWhite;
-  final Color touchedBarColor = AppColors.contentColorGreen;
+  final Color averageBarColor = AppColors.contentColorYellow;
+  final Color averageTouchedBarColor = AppColors.contentColorGreen;
+  final Color barColor = AppColors.contentColorPink;
+  final Color touchedBarColor = AppColors.contentColorPurple;
 
   @override
   State<StatefulWidget> createState() => CommunityScreenState();
@@ -36,56 +37,17 @@ class CommunityScreenState extends State<CommunityScreen> {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
-      child: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: BarChart(
-                      isPlaying ? randomData() : mainBarData(),
-                      swapAnimationDuration: animDuration,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: Icon(
-                  isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: AppColors.contentColorGreen,
-                ),
-                onPressed: () {
-                  setState(() {
-                    isPlaying = !isPlaying;
-                    if (isPlaying) {
-                      refreshState();
-                    }
-                  });
-                },
-              ),
-            ),
-          ),
-        ],
+      child: BarChart(
+        isPlaying ? randomData() : mainBarData(),
+        swapAnimationDuration: animDuration,
       ),
     );
   }
 
   BarChartGroupData makeGroupData(
     int x,
-    double y, {
+    double y1,
+    double y2, {
     bool isTouched = false,
     Color? barColor,
     double width = 22,
@@ -94,14 +56,24 @@ class CommunityScreenState extends State<CommunityScreen> {
     barColor ??= widget.barColor;
     return BarChartGroupData(
       x: x,
+      barsSpace: 10,
       barRods: [
         BarChartRodData(
-          toY: isTouched ? y + 1 : y,
+          toY: isTouched ? y1 + 1 : y1,
+          color: isTouched
+              ? widget.averageTouchedBarColor
+              : widget.averageBarColor,
+          width: width,
+          backDrawRodData: BackgroundBarChartRodData(
+            show: true,
+            toY: 20,
+            color: widget.barBackgroundColor,
+          ),
+        ),
+        BarChartRodData(
+          toY: isTouched ? y2 + 1 : y2,
           color: isTouched ? widget.touchedBarColor : barColor,
           width: width,
-          borderSide: isTouched
-              ? BorderSide(color: widget.touchedBarColor.darken(80))
-              : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             toY: 20,
@@ -116,19 +88,19 @@ class CommunityScreenState extends State<CommunityScreen> {
   List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, 5, isTouched: i == touchedIndex);
+            return makeGroupData(0, 5, 7, isTouched: i == touchedIndex);
           case 1:
-            return makeGroupData(1, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(1, 6.5, 8, isTouched: i == touchedIndex);
           case 2:
-            return makeGroupData(2, 5, isTouched: i == touchedIndex);
+            return makeGroupData(2, 5, 6, isTouched: i == touchedIndex);
           case 3:
-            return makeGroupData(3, 7.5, isTouched: i == touchedIndex);
+            return makeGroupData(3, 7.5, 7, isTouched: i == touchedIndex);
           case 4:
-            return makeGroupData(4, 9, isTouched: i == touchedIndex);
+            return makeGroupData(4, 9, 8.5, isTouched: i == touchedIndex);
           case 5:
-            return makeGroupData(5, 11.5, isTouched: i == touchedIndex);
+            return makeGroupData(5, 11.5, 10, isTouched: i == touchedIndex);
           case 6:
-            return makeGroupData(6, 6.5, isTouched: i == touchedIndex);
+            return makeGroupData(6, 6.5, 5, isTouched: i == touchedIndex);
           default:
             return throw Error();
         }
@@ -136,6 +108,7 @@ class CommunityScreenState extends State<CommunityScreen> {
 
   BarChartData mainBarData() {
     return BarChartData(
+      gridData: FlGridData(show: false),
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
           tooltipBgColor: Colors.blueGrey,
@@ -178,8 +151,8 @@ class CommunityScreenState extends State<CommunityScreen> {
               children: <TextSpan>[
                 TextSpan(
                   text: (rod.toY - 1).toString(),
-                  style: TextStyle(
-                    color: widget.touchedBarColor,
+                  style: const TextStyle(
+                    color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -225,38 +198,36 @@ class CommunityScreenState extends State<CommunityScreen> {
         show: false,
       ),
       barGroups: showingGroups(),
-      gridData: FlGridData(show: false),
     );
   }
 
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
-      color: Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: 14,
     );
     Widget text;
     switch (value.toInt()) {
       case 0:
-        text = const Text('M', style: style);
+        text = const Text('Mon', style: style);
         break;
       case 1:
-        text = const Text('T', style: style);
+        text = const Text('Tue', style: style);
         break;
       case 2:
-        text = const Text('W', style: style);
+        text = const Text('Wed', style: style);
         break;
       case 3:
-        text = const Text('T', style: style);
+        text = const Text('Thu', style: style);
         break;
       case 4:
-        text = const Text('F', style: style);
+        text = const Text('Fri', style: style);
         break;
       case 5:
-        text = const Text('S', style: style);
+        text = const Text('Sat', style: style);
         break;
       case 6:
-        text = const Text('S', style: style);
+        text = const Text('Sun', style: style);
         break;
       default:
         text = const Text('', style: style);
@@ -308,12 +279,14 @@ class CommunityScreenState extends State<CommunityScreen> {
             return makeGroupData(
               0,
               Random().nextInt(15).toDouble() + 6,
+              Random().nextInt(15).toDouble() + 6,
               barColor: widget.availableColors[
                   Random().nextInt(widget.availableColors.length)],
             );
           case 1:
             return makeGroupData(
               1,
+              Random().nextInt(15).toDouble() + 6,
               Random().nextInt(15).toDouble() + 6,
               barColor: widget.availableColors[
                   Random().nextInt(widget.availableColors.length)],
@@ -322,12 +295,14 @@ class CommunityScreenState extends State<CommunityScreen> {
             return makeGroupData(
               2,
               Random().nextInt(15).toDouble() + 6,
+              Random().nextInt(15).toDouble() + 6,
               barColor: widget.availableColors[
                   Random().nextInt(widget.availableColors.length)],
             );
           case 3:
             return makeGroupData(
               3,
+              Random().nextInt(15).toDouble() + 6,
               Random().nextInt(15).toDouble() + 6,
               barColor: widget.availableColors[
                   Random().nextInt(widget.availableColors.length)],
@@ -336,6 +311,7 @@ class CommunityScreenState extends State<CommunityScreen> {
             return makeGroupData(
               4,
               Random().nextInt(15).toDouble() + 6,
+              Random().nextInt(15).toDouble() + 6,
               barColor: widget.availableColors[
                   Random().nextInt(widget.availableColors.length)],
             );
@@ -343,12 +319,14 @@ class CommunityScreenState extends State<CommunityScreen> {
             return makeGroupData(
               5,
               Random().nextInt(15).toDouble() + 6,
+              Random().nextInt(15).toDouble() + 6,
               barColor: widget.availableColors[
                   Random().nextInt(widget.availableColors.length)],
             );
           case 6:
             return makeGroupData(
               6,
+              Random().nextInt(15).toDouble() + 6,
               Random().nextInt(15).toDouble() + 6,
               barColor: widget.availableColors[
                   Random().nextInt(widget.availableColors.length)],
@@ -359,15 +337,5 @@ class CommunityScreenState extends State<CommunityScreen> {
       }),
       gridData: FlGridData(show: false),
     );
-  }
-
-  Future<dynamic> refreshState() async {
-    setState(() {});
-    await Future<dynamic>.delayed(
-      animDuration + const Duration(milliseconds: 50),
-    );
-    if (isPlaying) {
-      await refreshState();
-    }
   }
 }

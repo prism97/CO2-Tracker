@@ -25,6 +25,7 @@ class CatalogueScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      padding: const EdgeInsets.all(20),
       itemBuilder: (context, index) => Card(
         child: ListTile(
           title: Text(machines[index]["machine"]),

@@ -22,15 +22,12 @@ class NavBar extends StatelessWidget {
           ),
           TextButton.icon(
             onPressed: () => router.go("/reward"),
-            icon: const Icon(Icons.compare),
+            icon: const Icon(Icons.card_giftcard),
             label: const Text("Reward"),
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: body,
-      ),
+      body: body,
     );
   }
 }
