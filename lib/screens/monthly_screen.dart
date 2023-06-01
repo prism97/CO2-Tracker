@@ -202,13 +202,13 @@ class _LineChartDaily extends State<LineChartDaily> {
         horizontalInterval: 1,
         getDrawingVerticalLine: (value) {
           return FlLine(
-            color: Color(0xff37434d),
+            color: const Color(0xff37434d),
             strokeWidth: 1,
           );
         },
         getDrawingHorizontalLine: (value) {
           return FlLine(
-            color: Color(0xff37434d),
+            color: const Color(0xff37434d),
             strokeWidth: 1,
           );
         },

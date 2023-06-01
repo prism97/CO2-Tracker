@@ -129,7 +129,7 @@ class _MachineScreenState extends State<MachineScreen> {
                         AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   ),
                 ),
-                swapAnimationDuration: Duration(minutes: 1),
+                swapAnimationDuration: const Duration(minutes: 1),
                 swapAnimationCurve: Curves.bounceInOut,
               ),
             ),

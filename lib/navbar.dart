@@ -1,3 +1,4 @@
+import 'package:co2_tracker/router.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -8,10 +9,18 @@ class NavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.ac_unit_outlined),
-        title: Text("CO2 Tracker"),
-        actions: [],
-        backgroundColor: Theme.of(context).primaryColorLight,
+        leading: IconButton(
+          onPressed: () => router.go("/"),
+          icon: const Icon(Icons.track_changes),
+        ),
+        title: const Text("CO2 Tracker"),
+        actions: [
+          TextButton.icon(
+            onPressed: () => router.go("/community"),
+            icon: const Icon(Icons.compare),
+            label: const Text("Community"),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

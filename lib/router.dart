@@ -1,5 +1,6 @@
 import 'package:co2_tracker/navbar.dart';
 import 'package:co2_tracker/screens/catalogue_screen.dart';
+import 'package:co2_tracker/screens/community_screen.dart';
 import 'package:co2_tracker/screens/machine_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -24,9 +25,13 @@ final GoRouter router = GoRouter(
           builder: (context, state) => const CatalogueScreen(),
           routes: <RouteBase>[
             GoRoute(
-              path: ':machine',
+              path: 'machine/:machine',
               builder: (context, state) => MachineScreen(
                   machine: state.pathParameters["machine"].toString()),
+            ),
+            GoRoute(
+              path: 'community',
+              builder: (context, state) => CommunityScreen(),
             ),
           ],
         ),
