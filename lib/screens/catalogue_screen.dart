@@ -25,13 +25,15 @@ class CatalogueScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemBuilder: (context, index) => ListTile(
-        isThreeLine: true,
-        title: Text(machines[index]["machine"]),
-        subtitle: Chip(
-          label: Text(machines[index]["category"]),
+      itemBuilder: (context, index) => Card(
+        child: ListTile(
+          title: Text(machines[index]["machine"]),
+          leading: Chip(
+            label: Text(machines[index]["category"]),
+          ),
+          trailing: Text("Meter ${machines[index]["meter"]}"),
+          onTap: () => router.go("/machine/${machines[index]["machine"]}"),
         ),
-        onTap: () => router.go("/${machines[index]["machine"]}"),
       ),
       separatorBuilder: (context, index) => const SizedBox(
         height: 10,
