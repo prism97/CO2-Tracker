@@ -68,6 +68,7 @@ flutter:
     - assets/images/sun-set-svgrepo-com.svg
     - assets/images/sun-fog-svgrepo-com.svg
     - assets/images/post-meridiem-afternoon-svgrepo-com.svg
+    - assets/images/Lidl.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
