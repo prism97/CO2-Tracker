@@ -17,9 +17,11 @@ class _MachineScreenState extends State<MachineScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(widget.machine),
         Wrap(
+          spacing: 10,
           children: [
             ChoiceChip(
               label: const Text("Daily"),
@@ -58,17 +60,20 @@ class _MachineScreenState extends State<MachineScreen> {
         ),
         if (daily)
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
+            width: MediaQuery.of(context).size.width * 0.4,
             child: const AspectRatio(
               aspectRatio: 1,
-              child: PieChartDaily(),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: PieChartDaily(),
+              ),
             ),
           ),
         if (monthly)
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
+            width: MediaQuery.of(context).size.width * 0.5,
             child: const AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 1.5,
               child: LineChartDaily(),
             ),
           ),
@@ -77,67 +82,70 @@ class _MachineScreenState extends State<MachineScreen> {
             width: MediaQuery.of(context).size.width * 0.7,
             child: AspectRatio(
               aspectRatio: 2,
-              child: BarChart(
-                BarChartData(
-                  maxY: 10,
-                  minY: 0,
-                  gridData: FlGridData(show: false),
-                  barGroups: [
-                    BarChartGroupData(
-                      x: 0,
-                      barRods: [
-                        BarChartRodData(toY: 7),
-                      ],
+              child: Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: BarChart(
+                  BarChartData(
+                    maxY: 10,
+                    minY: 0,
+                    gridData: FlGridData(show: false),
+                    barGroups: [
+                      BarChartGroupData(
+                        x: 0,
+                        barRods: [
+                          BarChartRodData(toY: 7),
+                        ],
+                      ),
+                      BarChartGroupData(
+                        x: 1,
+                        barRods: [
+                          BarChartRodData(toY: 4),
+                        ],
+                      ),
+                      BarChartGroupData(
+                        x: 2,
+                        barRods: [
+                          BarChartRodData(toY: 2),
+                        ],
+                      ),
+                      BarChartGroupData(
+                        x: 3,
+                        barRods: [
+                          BarChartRodData(toY: 9),
+                        ],
+                      ),
+                      BarChartGroupData(
+                        x: 4,
+                        barRods: [
+                          BarChartRodData(toY: 5),
+                        ],
+                      ),
+                      BarChartGroupData(
+                        x: 5,
+                        barRods: [
+                          BarChartRodData(toY: 3),
+                        ],
+                      ),
+                      BarChartGroupData(
+                        x: 6,
+                        barRods: [
+                          BarChartRodData(toY: 1),
+                        ],
+                      ),
+                    ],
+                    titlesData: FlTitlesData(
+                      bottomTitles: AxisTitles(sideTitles: _bottomTitles),
+                      leftTitles:
+                          AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                      topTitles:
+                          AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                      rightTitles:
+                          AxisTitles(sideTitles: SideTitles(showTitles: false)),
                     ),
-                    BarChartGroupData(
-                      x: 1,
-                      barRods: [
-                        BarChartRodData(toY: 4),
-                      ],
-                    ),
-                    BarChartGroupData(
-                      x: 2,
-                      barRods: [
-                        BarChartRodData(toY: 2),
-                      ],
-                    ),
-                    BarChartGroupData(
-                      x: 3,
-                      barRods: [
-                        BarChartRodData(toY: 9),
-                      ],
-                    ),
-                    BarChartGroupData(
-                      x: 4,
-                      barRods: [
-                        BarChartRodData(toY: 5),
-                      ],
-                    ),
-                    BarChartGroupData(
-                      x: 5,
-                      barRods: [
-                        BarChartRodData(toY: 3),
-                      ],
-                    ),
-                    BarChartGroupData(
-                      x: 6,
-                      barRods: [
-                        BarChartRodData(toY: 1),
-                      ],
-                    ),
-                  ],
-                  titlesData: FlTitlesData(
-                    bottomTitles: AxisTitles(sideTitles: _bottomTitles),
-                    leftTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    topTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
                   ),
+                  swapAnimationDuration: const Duration(minutes: 1),
+                  swapAnimationCurve: Curves.bounceInOut,
                 ),
-                swapAnimationDuration: const Duration(minutes: 1),
-                swapAnimationCurve: Curves.bounceInOut,
               ),
             ),
           ),

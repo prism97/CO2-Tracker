@@ -35,8 +35,11 @@ class CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+        vertical: 50,
+      ),
       child: BarChart(
         isPlaying ? randomData() : mainBarData(),
         swapAnimationDuration: animDuration,

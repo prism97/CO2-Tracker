@@ -105,24 +105,24 @@ class _LineChartDaily extends State<LineChartDaily> {
 
   LineChartData mainData() {
     return LineChartData(
-      gridData: FlGridData(
-        show: true,
-        drawVerticalLine: true,
-        horizontalInterval: 1,
-        verticalInterval: 1,
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: Colors.black,
-            strokeWidth: 1,
-          );
-        },
-        getDrawingVerticalLine: (value) {
-          return FlLine(
-            color: Colors.yellow,
-            strokeWidth: 1,
-          );
-        },
-      ),
+      // gridData: FlGridData(
+      //   show: true,
+      //   drawVerticalLine: true,
+      //   horizontalInterval: 1,
+      //   verticalInterval: 1,
+      //   getDrawingHorizontalLine: (value) {
+      //     return FlLine(
+      //       color: Colors.black,
+      //       strokeWidth: 1,
+      //     );
+      //   },
+      //   getDrawingVerticalLine: (value) {
+      //     return FlLine(
+      //       color: Colors.yellow,
+      //       strokeWidth: 1,
+      //     );
+      //   },
+      // ),
       titlesData: FlTitlesData(
         show: true,
         rightTitles: AxisTitles(
@@ -148,10 +148,10 @@ class _LineChartDaily extends State<LineChartDaily> {
           ),
         ),
       ),
-      borderData: FlBorderData(
-        show: true,
-        border: Border.all(color: const Color(0xff37434d)),
-      ),
+      // borderData: FlBorderData(
+      //   show: true,
+      //   border: Border.all(color: const Color(0xff37434d)),
+      // ),
       minX: 0,
       maxX: 11,
       minY: 0,
@@ -192,24 +192,24 @@ class _LineChartDaily extends State<LineChartDaily> {
   LineChartData avgData() {
     return LineChartData(
       lineTouchData: LineTouchData(enabled: false),
-      gridData: FlGridData(
-        show: true,
-        drawHorizontalLine: true,
-        verticalInterval: 1,
-        horizontalInterval: 1,
-        getDrawingVerticalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-      ),
+      // gridData: FlGridData(
+      //   show: true,
+      //   drawHorizontalLine: true,
+      //   verticalInterval: 1,
+      //   horizontalInterval: 1,
+      //   getDrawingVerticalLine: (value) {
+      //     return FlLine(
+      //       color: const Color(0xff37434d),
+      //       strokeWidth: 1,
+      //     );
+      //   },
+      //   getDrawingHorizontalLine: (value) {
+      //     return FlLine(
+      //       color: const Color(0xff37434d),
+      //       strokeWidth: 1,
+      //     );
+      //   },
+      // ),
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: AxisTitles(
@@ -235,10 +235,10 @@ class _LineChartDaily extends State<LineChartDaily> {
           sideTitles: SideTitles(showTitles: false),
         ),
       ),
-      borderData: FlBorderData(
-        show: true,
-        border: Border.all(color: const Color(0xff37434d)),
-      ),
+      // borderData: FlBorderData(
+      //   show: true,
+      //   border: Border.all(color: const Color(0xff37434d)),
+      // ),
       minX: 0,
       maxX: 11,
       minY: 0,
